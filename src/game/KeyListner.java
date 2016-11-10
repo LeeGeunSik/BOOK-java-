@@ -5,11 +5,11 @@ import java.awt.event.KeyListener;
 
 public class KeyListner implements KeyListener {
 
-	Movable obj;
+	Movable player;
 
 	public KeyListner(Movable a) {
 		// TODO Auto-generated constructor stub
-		obj = a;
+		player = a;
 	}
 
 	@Override
@@ -17,20 +17,16 @@ public class KeyListner implements KeyListener {
 		// TODO Auto-generated method stub
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_UP:
-			obj.setDirection(Movable.UP);
-			obj.setSpeed(20);
+			player.addYspeed(-player.getSpeed());
 			break;
 		case KeyEvent.VK_DOWN:
-			obj.setDirection(Movable.DOWN);
-			obj.setSpeed(20);
+			player.addYspeed(player.getSpeed());
 			break;
 		case KeyEvent.VK_LEFT:
-			obj.setDirection(Movable.LEFT);
-			obj.setSpeed(20);
+			player.addXspeed(-player.getSpeed());
 			break;
 		case KeyEvent.VK_RIGHT:
-			obj.setDirection(Movable.RIGHT);
-			obj.setSpeed(20);
+			player.addXspeed(player.getSpeed());
 			break;
 
 		default:
@@ -42,8 +38,23 @@ public class KeyListner implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		obj.setSpeed(0);
+		switch (e.getKeyCode()) {
+		case KeyEvent.VK_UP:
+			player.addYspeed(player.getSpeed());
+			break;
+		case KeyEvent.VK_DOWN:
+			player.addYspeed(-player.getSpeed());
+			break;
+		case KeyEvent.VK_LEFT:
+			player.addYspeed(player.getSpeed());
+			break;
+		case KeyEvent.VK_RIGHT:
+			player.addYspeed(-player.getSpeed());
+			break;
 
+		default:
+			break;
+		}
 	}
 
 	@Override

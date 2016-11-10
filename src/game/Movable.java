@@ -1,46 +1,67 @@
 package game;
 
 public class Movable extends Map {
-	public static final int UP = 0;
-	public static final int DOWN = 1;
-	public static final int LEFT = 2;
-	public static final int RIGHT = 3;
-	private int direction;
+	private int xspeed;
+	private int yspeed;
 	private int speed;
+	private int maxSpeed;
 
 	public Movable() {
 		// TODO Auto-generated constructor stub
-		direction = DOWN;
-		speed = 0;
+		xspeed = 0;
+		yspeed = 0;
+		speed = 3;
+		maxSpeed = 3;
+	}
+
+	public int getSpeed() {
+		return speed;
 	}
 
 	public void setSpeed(int speed) {
-		this.speed = speed;
+		if (speed <= maxSpeed)
+			this.speed = speed;
 	}
 
-	public void setDirection(int direction) {
-		if (direction <= RIGHT && direction >= UP)
-			this.direction = direction;
+	public int getXspeed() {
+		return xspeed;
+	}
+
+	public void addXspeed(int xspeed) {
+		if (this.xspeed + xspeed <= maxSpeed)
+			this.xspeed += xspeed;
+		else
+			this.xspeed = maxSpeed;
+	}
+
+	public int getYspeed() {
+		return yspeed;
+	}
+
+	public void addYspeed(int yspeed) {
+		if (this.yspeed + yspeed <= maxSpeed)
+			this.yspeed += yspeed;
+		else
+			this.yspeed = maxSpeed;
+	}
+
+	public void setXspeed(int xspeed) {
+		if (xspeed <= maxSpeed)
+			this.xspeed = xspeed;
+		else
+			this.xspeed = maxSpeed;
+	}
+
+	public void setYspeed(int yspeed) {
+		if (yspeed <= maxSpeed)
+			this.yspeed = yspeed;
+		else
+			this.yspeed = maxSpeed;
 	}
 
 	public void move() {
-		switch (direction) {
-		case UP:
-			setY(getY() - speed);
-			break;
-		case DOWN:
-			setY(getY() + speed);
-			break;
-		case LEFT:
-			setX(getX() - speed);
-			break;
-		case RIGHT:
-			setX(getX() + speed);
-			break;
-
-		default:
-			break;
-		}
+		setX(getX() + xspeed);
+		setY(getY() + yspeed);
 	}
 
 }

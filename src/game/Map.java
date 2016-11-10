@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 public class Map {
 	private int x, y, width, height, maxX, maxY;
+	
 
 	public int getX() {
 		return x;

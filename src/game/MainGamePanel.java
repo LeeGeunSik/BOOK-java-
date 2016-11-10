@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 public class MainGamePanel extends JPanel implements KeyListener {
 	ArrayList<Map> gameObj;
-	Player p;
+	Player player;
 
 	public MainGamePanel() {
 		// TODO Auto-generated constructor stub
@@ -18,12 +18,10 @@ public class MainGamePanel extends JPanel implements KeyListener {
 			for (int y = 0; y < 800; y = y + Tile.Height) {
 				gameObj.add(new Tile(x, y));
 			}
-		gameObj.add(new Door(0, 0));
-		gameObj.add(new Door(10, 10));
 		addKeyListener(this);
-		p = new Player();
-		gameObj.add(p);
-		Thread t = new Thread(new Timer(p,this));
+		player = new Player();
+		gameObj.add(player);
+		Thread t = new Thread(new Timer(player,this));
 		t.start();
 
 	}
@@ -42,20 +40,16 @@ public class MainGamePanel extends JPanel implements KeyListener {
 		// TODO Auto-generated method stub
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_UP:
-			p.setDirection(Movable.UP);
-			p.setSpeed(5);
+			player.setYspeed(-player.getSpeed());
 			break;
 		case KeyEvent.VK_DOWN:
-			p.setDirection(Movable.DOWN);
-			p.setSpeed(5);
+			player.setYspeed(player.getSpeed());
 			break;
 		case KeyEvent.VK_LEFT:
-			p.setDirection(Movable.LEFT);
-			p.setSpeed(5);
+			player.setXspeed(-player.getSpeed());
 			break;
 		case KeyEvent.VK_RIGHT:
-			p.setDirection(Movable.RIGHT);
-			p.setSpeed(5);
+			player.setXspeed(player.getSpeed());
 			break;
 
 		default:
@@ -67,7 +61,23 @@ public class MainGamePanel extends JPanel implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		p.setSpeed(0);
+		switch (e.getKeyCode()) {
+		case KeyEvent.VK_UP:
+			player.addYspeed(player.getSpeed());
+			break;
+		case KeyEvent.VK_DOWN:
+			player.addYspeed(-player.getSpeed());
+			break;
+		case KeyEvent.VK_LEFT:
+			player.addXspeed(player.getSpeed());
+			break;
+		case KeyEvent.VK_RIGHT:
+			player.addXspeed(-player.getSpeed());
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	@Override

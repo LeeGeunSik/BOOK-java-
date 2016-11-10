@@ -16,12 +16,13 @@ public class Timer implements Runnable {
 		// TODO Auto-generated method stub
 		while (true) {
 			p.move();
+			g.repaint();
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				// TODO: handle exception
 			}
-			g.repaint();
+			
 		}
 	}
 
