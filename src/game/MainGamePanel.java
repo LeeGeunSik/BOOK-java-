@@ -12,15 +12,25 @@ public class MainGamePanel extends JPanel implements KeyListener {
 	ArrayList<Movable> movingObj;//움직이는 객체
 	Player player;
 	Wolf w;
+	int[][] wallPos={{}};
 
 	public MainGamePanel() {
 		// TODO Auto-generated constructor stub
 		gameObj = new ArrayList<Map>();//리스트 생성
 		movingObj = new ArrayList<Movable>();
-		for (int x = 0; x < 800; x = x + Tile.Width)
-			for (int y = 0; y < 800; y = y + Tile.Height) {
+//		for (int x = 0; x <= 1200; x = x + Tile.Width)
+//			for (int y = 0; y <= 900; y = y + Tile.Height) {
+//				gameObj.add(new Tile(x, y));// 리스트에 타일 객체 추가
+//			}
+		for (int x = 0; x <= 1200; x = x + 50)
+			for (int y = 0; y <= 900; y = y + 50) {
 				gameObj.add(new Tile(x, y));// 리스트에 타일 객체 추가
 			}
+		for (int x[] : wallPos) {
+			for (int y : x) {
+				gameObj.add(new Wall(x[0], y));
+			}
+		}
 		addKeyListener(this);
 		player = new Player();
 		gameObj.add(player);// 플레이어 추가

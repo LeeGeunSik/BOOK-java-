@@ -8,10 +8,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Tile extends UnMovable {
-
-	BufferedImage img;
 	public static final int Height = 100;
 	public static final int Width = 100;
+	BufferedImage img;
 
 	public Tile(int x, int y) {
 		// TODO Auto-generated constructor stub
@@ -29,8 +28,10 @@ public class Tile extends UnMovable {
 	@Override
 	public void drawObj(Graphics g) {
 		// TODO Auto-generated method stub
-		g.drawImage(img, getX(), getY(), Width, Height, null);
+		// g.drawImage(img, getX(), getY(), Width, Height, null);
+		g.drawRect(x, y, getWidth(), getHeight());
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		// TODO Auto-generated method stub

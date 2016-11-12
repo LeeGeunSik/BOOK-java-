@@ -30,5 +30,14 @@ public class Wolf extends Movable {
 	public void move() {//늑대의 움직임을 정의하는 메소드
 		// TODO Auto-generated method stub
 	}
+	private void turn() {//늑대가 사거리에 다다랐을때 호출되는 메소드
+		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "wolf";
+	}
 }

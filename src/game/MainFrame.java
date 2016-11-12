@@ -1,5 +1,7 @@
 package game;
 
+import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Font;
 import java.util.ArrayList;
 
@@ -9,11 +11,11 @@ import javax.swing.JPanel;
 public class MainFrame extends JFrame {
 	JPanel Gpanel;
 	public MainFrame() {
-		this.setSize(800, 800);
+		this.setSize(1400, 1000);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("BOOC");
 		Gpanel = new MainGamePanel();
-		add(Gpanel);
+		add(Gpanel,BorderLayout.CENTER);
 		setVisible(true);
 		Gpanel.requestFocus();
 	}

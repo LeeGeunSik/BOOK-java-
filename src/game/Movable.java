@@ -10,7 +10,7 @@ public class Movable extends Map {
 		// TODO Auto-generated constructor stub
 		xspeed = 0;
 		yspeed = 0;
-		speed = 3;
+		speed = 2;
 		maxSpeed = 3;
 	}
 

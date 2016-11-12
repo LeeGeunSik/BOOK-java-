@@ -3,7 +3,12 @@ package game;
 import java.awt.Graphics;
 
 public class Map {
-	private int x, y, width, height, maxX, maxY;
+	protected int x;
+	protected int y;
+	private int width;
+	private int height;
+	private int maxX;
+	private int maxY;
 
 	public int getX() {
 		return x;
@@ -49,8 +54,8 @@ public class Map {
 
 	public Map() {
 		// TODO Auto-generated constructor stub
-		maxX = 500;
-		maxY = 500;
+		maxX = 1200;
+		maxY = 900;
 		width = 50;
 		height = 50;
 	}
