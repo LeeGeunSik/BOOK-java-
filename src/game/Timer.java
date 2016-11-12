@@ -1,22 +1,27 @@
 package game;
 
+import java.awt.Graphics;
+import java.util.ArrayList;
+
 public class Timer implements Runnable {
 
-	Player p;
-	MainGamePanel g;
+	ArrayList<Movable> m;
+	MainGamePanel panel;
 
-	public Timer(Player p,MainGamePanel g) {
+	public Timer(ArrayList<Movable> p,MainGamePanel panel) {
 		// TODO Auto-generated constructor stub
-		this.p = p;
-		this.g= g;
+		this.m = p;
+		this.panel= panel;
 	}
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		while (true) {
-			p.move();
-			g.repaint();
+			for (Movable obj : m) {
+				obj.move();
+			}
+			panel.repaint();
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {

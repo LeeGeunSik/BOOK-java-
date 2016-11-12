@@ -8,21 +8,24 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 public class MainGamePanel extends JPanel implements KeyListener {
-	ArrayList<Map> gameObj;
+	ArrayList<Map> gameObj;// 맵에 존재하는 모든 객체를 모은 리스트
+	ArrayList<Movable> movingObj;//움직이는 객체
 	Player player;
 
 	public MainGamePanel() {
 		// TODO Auto-generated constructor stub
-		gameObj = new ArrayList<Map>();
+		gameObj = new ArrayList<Map>();//리스트 생성
+		movingObj = new ArrayList<Movable>();
 		for (int x = 0; x < 800; x = x + Tile.Width)
 			for (int y = 0; y < 800; y = y + Tile.Height) {
-				gameObj.add(new Tile(x, y));
+				gameObj.add(new Tile(x, y));// 리스트에 타일 객체 추가
 			}
 		addKeyListener(this);
 		player = new Player();
-		gameObj.add(player);
-		Thread t = new Thread(new Timer(player,this));
-		t.start();
+		gameObj.add(player);// 플레이어 추가
+		movingObj.add(player);
+		Thread t = new Thread(new Timer(movingObj, this));// 시간을 가게 하는 쓰레드 생성
+		t.start();// 쓰레드 시작
 
 	}
 
@@ -31,7 +34,7 @@ public class MainGamePanel extends JPanel implements KeyListener {
 		// TODO Auto-generated method stub
 		super.paint(arg0);
 		for (Map map : gameObj) {
-			map.drawObj(arg0);
+			map.drawObj(arg0);// 모든 객체그림
 		}
 	}
 
@@ -85,6 +88,5 @@ public class MainGamePanel extends JPanel implements KeyListener {
 		// TODO Auto-generated method stub
 
 	}
-
 
 }

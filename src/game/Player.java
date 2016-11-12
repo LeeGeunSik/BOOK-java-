@@ -17,7 +17,7 @@ public class Player extends Movable {
 		setHeight(60);
 		setWidth(60);
 		try{
-			player = ImageIO.read(new File("lamb.png"));
+			player = ImageIO.read(new File("lamb.png"));//플레이어 이미지 불러오기
 		} 
 		catch(IOException e){
 			System.out.println("플레이어 이미지 불러오기 실패");
@@ -27,6 +27,6 @@ public class Player extends Movable {
 	public void drawObj(Graphics g) {
 		// TODO Auto-generated method stub
 		super.drawObj(g);
-		g.drawImage(player, getX(), getY(), getWidth(), getHeight(), null);
+		g.drawImage(player, getX(), getY(), getWidth(), getHeight(), null);//자신을 그리는 메소드 Timer클래스에서 이 메소드를 호출한다.
 	}
 }

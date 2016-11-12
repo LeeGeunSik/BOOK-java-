@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 public class MainFrame extends JFrame {
 	JPanel Gpanel;
 	public MainFrame() {
-		// TODO Auto-generated constructor stub
 		this.setSize(800, 800);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("BOOC");
