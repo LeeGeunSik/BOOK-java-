@@ -12,10 +12,10 @@ public class Player extends Movable {
 	BufferedImage player;
 	public Player() {
 		// TODO Auto-generated constructor stub
-		setX(0);
-		setY(0);
-		setHeight(60);
-		setWidth(60);
+		setX(300);
+		setY(300);
+		setHeight(50);
+		setWidth(50);
 		try{
 			player = ImageIO.read(new File("lamb.png"));//플레이어 이미지 불러오기
 		} 

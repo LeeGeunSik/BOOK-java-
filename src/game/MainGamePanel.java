@@ -11,6 +11,7 @@ public class MainGamePanel extends JPanel implements KeyListener {
 	ArrayList<Map> gameObj;// 맵에 존재하는 모든 객체를 모은 리스트
 	ArrayList<Movable> movingObj;//움직이는 객체
 	Player player;
+	Wolf w;
 
 	public MainGamePanel() {
 		// TODO Auto-generated constructor stub
@@ -24,8 +25,11 @@ public class MainGamePanel extends JPanel implements KeyListener {
 		player = new Player();
 		gameObj.add(player);// 플레이어 추가
 		movingObj.add(player);
-		Thread t = new Thread(new Timer(movingObj, this));// 시간을 가게 하는 쓰레드 생성
-		t.start();// 쓰레드 시작
+		w= new Wolf(50, 50);
+		gameObj.add(w);
+		movingObj.add(w);
+		new Thread(new Timer(movingObj, this)).start();// 시간을 가게 하는 쓰레드 생성 및 시작
+		new Thread(new Checker(gameObj)).start();;
 
 	}
 
@@ -43,16 +47,16 @@ public class MainGamePanel extends JPanel implements KeyListener {
 		// TODO Auto-generated method stub
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_UP:
-			player.setYspeed(-player.getSpeed());
+			player.setYspeed(-player.getSpeed());//위로간다.
 			break;
 		case KeyEvent.VK_DOWN:
-			player.setYspeed(player.getSpeed());
+			player.setYspeed(player.getSpeed());//밑으로 간다.
 			break;
 		case KeyEvent.VK_LEFT:
-			player.setXspeed(-player.getSpeed());
+			player.setXspeed(-player.getSpeed());//왼쪽으로 간다.
 			break;
 		case KeyEvent.VK_RIGHT:
-			player.setXspeed(player.getSpeed());
+			player.setXspeed(player.getSpeed());//오른쪽으로 간다.
 			break;
 
 		default:
