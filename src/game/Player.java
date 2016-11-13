@@ -12,8 +12,8 @@ public class Player extends Movable {
 	BufferedImage player;
 	public Player() {
 		// TODO Auto-generated constructor stub
-		setX(110);
-		setY(110);
+		setX(100);
+		setY(100);
 		setHeight(50);
 		setWidth(50);
 		try{

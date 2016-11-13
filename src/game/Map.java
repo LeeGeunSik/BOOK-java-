@@ -5,6 +5,7 @@ import java.awt.Graphics;
 public class Map {
 	protected int x;
 	protected int y;
+	static final int offset = 50;
 	private int width;
 	private int height;
 	private int maxX;
@@ -56,8 +57,8 @@ public class Map {
 		// TODO Auto-generated constructor stub
 		maxX = 1200;
 		maxY = 900;
-		width = 50;
-		height = 50;
+		width = offset;
+		height = offset;
 	}
 
 	public void drawObj(Graphics g) {
