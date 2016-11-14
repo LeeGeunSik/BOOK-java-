@@ -24,7 +24,7 @@ public class Wall extends UnMovable {//움직이는 못하는 객체. 벽이다.
 	@Override
 	public void drawObj(Graphics g) {
 		// TODO Auto-generated method stub
-		g.drawImage(img, x, y, getWidth(), getHeight(), null);
+		g.drawImage(img, (int)x, (int)y, (int)getWidth(), (int)getHeight(), null);
 	}
 	@Override
 		public String toString() {

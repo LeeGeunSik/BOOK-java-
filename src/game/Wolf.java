@@ -24,7 +24,7 @@ public class Wolf extends Movable {
 	public void drawObj(Graphics g) {
 		// TODO Auto-generated method stub
 		super.drawObj(g);
-		g.drawImage(wolf, getX(), getY(), getWidth(), getHeight(), null);
+		g.drawImage(wolf, (int)getX(), (int)getY(), (int)getWidth(), (int)getHeight(), null);
 	}
 	@Override
 	public void move() {//늑대의 움직임을 정의하는 메소드

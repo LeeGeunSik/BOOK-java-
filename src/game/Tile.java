@@ -29,7 +29,7 @@ public class Tile extends UnMovable {
 	public void drawObj(Graphics g) {
 		// TODO Auto-generated method stub
 		// g.drawImage(img, getX(), getY(), Width, Height, null);
-		g.drawRect(x, y, getWidth(), getHeight());
+		g.drawRect((int)x, (int)y, (int)getWidth(), (int)getHeight());
 	}
 
 	@Override

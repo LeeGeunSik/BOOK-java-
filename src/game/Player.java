@@ -28,7 +28,7 @@ public class Player extends Movable {
 	public void drawObj(Graphics g) {
 		// TODO Auto-generated method stub
 		super.drawObj(g);
-		g.drawImage(player, getX(), getY(), getWidth(), getHeight(), null);//자신을 그리는 메소드 Timer클래스에서 이 메소드를 호출한다.
+		g.drawImage(player, (int)getX(), (int)getY(), (int)getWidth(), (int)getHeight(), null);//자신을 그리는 메소드 Timer클래스에서 이 메소드를 호출한다.
 	}
 	@Override
 	public String toString() {

@@ -3,16 +3,16 @@ package game;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-public class Timer implements Runnable {//움직이는 객체를 받아서 시간에 따라 움직이게 하는 클래스
+public class Timer implements Runnable {// 움직이는 객체를 받아서 시간에 따라 움직이게 하는 클래스
 
-	ArrayList<Movable> m;//움직이는 객체들의 리스트
-	MainGamePanel panel;//게임패널. 객체들을 움직인다음 repaint를 호출하기 위함.
-	ArrayList<Map> obj;//모든 객체 리스트
+	ArrayList<Movable> m;// 움직이는 객체들의 리스트
+	MainGamePanel panel;// 게임패널. 객체들을 움직인다음 repaint를 호출하기 위함.
+	ArrayList<Map> obj;// 모든 객체 리스트
 
-	public Timer(ArrayList<Movable> p,ArrayList<Map> all,MainGamePanel panel) {
+	public Timer(ArrayList<Movable> p, ArrayList<Map> all, MainGamePanel panel) {
 		// TODO 움직이는 객체들의 리스트를 받고 게임패널의 레퍼런스를 받는다.
 		this.m = p;
-		this.panel= panel;
+		this.panel = panel;
 		this.obj = all;
 	}
 
@@ -20,37 +20,39 @@ public class Timer implements Runnable {//움직이는 객체를 받아서 시간에 따라 움�
 	public void run() {
 		// TODO 일정시간마다 객체들을 움직이고 패널의 repaint를 호출하여 화면을 갱신한다.
 		while (true) {
-			for (Movable obj : m) {
-				obj.moveX();//객체의 move메소드를 호출하여 움직임.
+			for (Movable mobj : m) {
+				mobj.moveX();// 객체의 move메소드를 호출하여 움직임.
 				check();
-				obj.moveX();
-				obj.moveY();
+				mobj.moveX();
+				mobj.moveY();
 				check();
-				obj.moveY();
+				mobj.moveY();
 			}
 			panel.repaint();
 			try {
-				Thread.sleep(10);//0.01초 일시정지
+				Thread.sleep(10);// 0.01초 일시정지
 			} catch (InterruptedException e) {
 				// TODO: handle exception
 			}
-			
+
 		}
 	}
-	public void check() {//객체들의 충돌여부를 검사하는 메소드
 
-		Map a,b;
+	public void check() {// 객체들의 충돌여부를 검사하는 메소드
+
+		Map a, b;
 		for (int i = 0; i < obj.size(); i++)
 			for (int j = i + 1; j < obj.size(); j++) {// 모든 객체를 비교해 본다.
-				a=obj.get(i);
-				b=obj.get(j);
+				a = obj.get(i);
+				b = obj.get(j);
+				a.checked = true;
 				if (a.equals(b)) {
 					switch (a.toString()) {
 					case "player":// 플레이어가
-						Player p;
 						if (b.toString() == "wolf")// 늑대와 만났을때
 							System.out.println("you die.");
 						else if (b.toString() == "wall") {
+							Player p;
 							p = (Player) a;
 							p.bumped = true;
 						}
@@ -67,7 +69,7 @@ public class Timer implements Runnable {//움직이는 객체를 받아서 시간에 따라 움�
 				}
 
 			}
-	
+
 	}
 
 }

@@ -1,12 +1,14 @@
 package game;
 
+import java.util.ArrayList;
+
 public class Movable extends Map {
 	private int xspeed;
 	private int yspeed;
 	private int speed;
 	private int maxSpeed;
 	protected int xpos, ypos;
-	protected boolean bumped;// 다른 객체와 부딪혔는지 여부.
+	
 
 	public Movable() {
 		// TODO Auto-generated constructor stub
@@ -14,6 +16,7 @@ public class Movable extends Map {
 		yspeed = 0;
 		speed = 2;
 		maxSpeed = 3;
+		bumped = false;
 	}
 
 	public int getSpeed() {
@@ -63,34 +66,45 @@ public class Movable extends Map {
 
 	public void move() {
 		if (bumped == true) {// 부딪혔으면 전 위치로 돌아간다.
-			x = xpos;
-			y = ypos;
+			if (xspeed != 0)
+				x = xpos;
+			if (yspeed != 0)
+				y = ypos;
 			bumped = false;
 		} else {
 			xpos = x;// 이전 위치 저장
 			ypos = y;
-			setX(x+xspeed);
-			setY(y+yspeed);
+			setX(x + xspeed);
+			setY(y + yspeed);
 		}
-	}
-	public void moveX() {
-		if (bumped == true) {// 부딪혔으면 전 위치로 돌아간다.
-			x = xpos;
-			bumped = false;
-		} else {
-			xpos = x;// 이전 위치 저장
-			setX(x+xspeed);
-		}
-	}
-	public void moveY() {
-		if (bumped == true) {// 부딪혔으면 전 위치로 돌아간다.
-			y = ypos;
-			bumped = false;
-		} else {
-			ypos = y;
-			setY(y+yspeed);
-		}
-		
 	}
 
+	public void moveX() {
+		if (checked == true) {
+			if (bumped == true) {// 부딪혔으면 전 위치로 돌아간다.
+				setX(x-xspeed);
+				bumped = false;
+				checked = false;
+			}
+			else
+				checked = false;
+		} else {
+			setX(x + xspeed);
+		}
+
+	}
+
+	public void moveY() {
+		if (checked == true) {
+			if (bumped == true) {// 부딪혔으면 전 위치로 돌아간다.
+				setY(y-yspeed);
+				bumped = false;
+				checked = false;
+			}
+			else
+				checked = false;
+		} else {
+			setY(y + yspeed);
+		}
+	}
 }
