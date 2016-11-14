@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 public class MainGamePanel extends JPanel implements KeyListener {
 	ArrayList<Map> gameObj;// 맵에 존재하는 모든 객체를 모은 리스트
 	ArrayList<Movable> movingObj;//움직이는 객체
+	ArrayList<Tile> tile;//타일만 모아두는 리스트.
 	Player player;
 	Wolf w;
 	int[][] wallPos={{0,0},{0,2},{0,3},{0,4},{0,5},{0,6},{0,12},{0,13},{0,14},{0,15},{0,21},{0,22},{0,23},
@@ -35,25 +36,22 @@ public class MainGamePanel extends JPanel implements KeyListener {
 		// TODO Auto-generated constructor stub
 		gameObj = new ArrayList<Map>();//리스트 생성
 		movingObj = new ArrayList<Movable>();
-//		for (int x = 0; x <= 1200; x = x + Tile.Width)
-//			for (int y = 0; y <= 900; y = y + Tile.Height) {
-//				gameObj.add(new Tile(x, y));// 리스트에 타일 객체 추가
-//			}
+		tile = new ArrayList<Tile>();
 		for (int x = 0; x <= 1200; x = x + 50)
 			for (int y = 0; y <= 900; y = y + 50) {
-				gameObj.add(new Tile(x, y));// 리스트에 타일 객체 추가
+				tile.add(new Tile(x, y));// 리스트에 타일 객체 추가
 			}
-		for(int i=0;i<wallPos.length;i++)
-			gameObj.add(new Wall(wallPos[i][1]*Map.offset, wallPos[i][0]*Map.offset));
-		addKeyListener(this);
 		player = new Player();
 		gameObj.add(player);// 플레이어 추가
 		movingObj.add(player);
+		for(int i=0;i<wallPos.length;i++)
+			gameObj.add(new Wall(wallPos[i][1]*Map.offset, wallPos[i][0]*Map.offset));
+		addKeyListener(this);		
 		w= new Wolf(50, 50);
 		gameObj.add(w);
 		movingObj.add(w);
-		new Thread(new Timer(movingObj, this)).start();// 시간을 가게 하는 쓰레드 생성 및 시작
-		new Thread(new Checker(gameObj)).start();;
+		new Thread(new Timer(movingObj, gameObj,this)).start();// 시간을 가게 하는 쓰레드 생성 및 시작
+//		new Thread(new Checker(gameObj)).start();;
 
 	}
 
@@ -61,6 +59,9 @@ public class MainGamePanel extends JPanel implements KeyListener {
 	public void paint(Graphics arg0) {
 		// TODO Auto-generated method stub
 		super.paint(arg0);
+		for (Tile t : tile) {
+			t.drawObj(arg0);
+		}
 		for (Map map : gameObj) {
 			map.drawObj(arg0);// 모든 객체그림
 		}

@@ -7,11 +7,13 @@ public class Timer implements Runnable {//¿òÁ÷ÀÌ´Â °´Ã¼¸¦ ¹Þ¾Æ¼­ ½Ã°£¿¡ µû¶ó ¿òÁ
 
 	ArrayList<Movable> m;//¿òÁ÷ÀÌ´Â °´Ã¼µéÀÇ ¸®½ºÆ®
 	MainGamePanel panel;//°ÔÀÓÆÐ³Î. °´Ã¼µéÀ» ¿òÁ÷ÀÎ´ÙÀ½ repaint¸¦ È£ÃâÇÏ±â À§ÇÔ.
+	ArrayList<Map> obj;//¸ðµç °´Ã¼ ¸®½ºÆ®
 
-	public Timer(ArrayList<Movable> p,MainGamePanel panel) {
+	public Timer(ArrayList<Movable> p,ArrayList<Map> all,MainGamePanel panel) {
 		// TODO ¿òÁ÷ÀÌ´Â °´Ã¼µéÀÇ ¸®½ºÆ®¸¦ ¹Þ°í °ÔÀÓÆÐ³ÎÀÇ ·¹ÆÛ·±½º¸¦ ¹Þ´Â´Ù.
 		this.m = p;
 		this.panel= panel;
+		this.obj = all;
 	}
 
 	@Override
@@ -19,7 +21,12 @@ public class Timer implements Runnable {//¿òÁ÷ÀÌ´Â °´Ã¼¸¦ ¹Þ¾Æ¼­ ½Ã°£¿¡ µû¶ó ¿òÁ
 		// TODO ÀÏÁ¤½Ã°£¸¶´Ù °´Ã¼µéÀ» ¿òÁ÷ÀÌ°í ÆÐ³ÎÀÇ repaint¸¦ È£ÃâÇÏ¿© È­¸éÀ» °»½ÅÇÑ´Ù.
 		while (true) {
 			for (Movable obj : m) {
-				obj.move();//°´Ã¼ÀÇ move¸Þ¼Òµå¸¦ È£ÃâÇÏ¿© ¿òÁ÷ÀÓ.
+				obj.moveX();//°´Ã¼ÀÇ move¸Þ¼Òµå¸¦ È£ÃâÇÏ¿© ¿òÁ÷ÀÓ.
+				check();
+				obj.moveX();
+				obj.moveY();
+				check();
+				obj.moveY();
 			}
 			panel.repaint();
 			try {
@@ -29,6 +36,38 @@ public class Timer implements Runnable {//¿òÁ÷ÀÌ´Â °´Ã¼¸¦ ¹Þ¾Æ¼­ ½Ã°£¿¡ µû¶ó ¿òÁ
 			}
 			
 		}
+	}
+	public void check() {//°´Ã¼µéÀÇ Ãæµ¹¿©ºÎ¸¦ °Ë»çÇÏ´Â ¸Þ¼Òµå
+
+		Map a,b;
+		for (int i = 0; i < obj.size(); i++)
+			for (int j = i + 1; j < obj.size(); j++) {// ¸ðµç °´Ã¼¸¦ ºñ±³ÇØ º»´Ù.
+				a=obj.get(i);
+				b=obj.get(j);
+				if (a.equals(b)) {
+					switch (a.toString()) {
+					case "player":// ÇÃ·¹ÀÌ¾î°¡
+						Player p;
+						if (b.toString() == "wolf")// ´Á´ë¿Í ¸¸³µÀ»¶§
+							System.out.println("you die.");
+						else if (b.toString() == "wall") {
+							p = (Player) a;
+							p.bumped = true;
+						}
+						break;
+					case "wolf":
+						if (b.toString() == "turningPt")
+
+							break;
+
+					default:
+						break;
+
+					}
+				}
+
+			}
+	
 	}
 
 }

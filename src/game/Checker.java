@@ -20,10 +20,15 @@ public class Checker implements Runnable {
 					if (obj.get(i).equals(obj.get(j))) {
 						switch (obj.get(i).toString()) {
 						case "player":// 플레이어가
+							Player a;
 							if (obj.get(j).toString() == "wolf")// 늑대와 만났을때
 								System.out.println("you die.");
-							else if (obj.get(j).toString() == "wall")// 벽과 만났을때
-								break;
+							else if (obj.get(j).toString() == "wall") {
+								a = (Player) obj.get(i);
+								a.bumped = true;
+								
+							}
+							break;
 						case "wolf":
 							if (obj.toString() == "turningPt")
 

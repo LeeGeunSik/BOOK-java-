@@ -14,8 +14,8 @@ public class Player extends Movable {
 		// TODO Auto-generated constructor stub
 		setX(100);
 		setY(100);
-		setHeight(50);
-		setWidth(50);
+		setHeight(40);
+		setWidth(40);
 		try{
 			player = ImageIO.read(new File("lamb.png"));//플레이어 이미지 불러오기
 		} 
