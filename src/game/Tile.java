@@ -13,7 +13,6 @@ public class Tile extends UnMovable {
 	BufferedImage img;
 
 	public Tile(int x, int y) {
-		// TODO Auto-generated constructor stub
 		try {
 			img = ImageIO.read(new File("brick.png"));
 		} catch (IOException e) {
@@ -21,20 +20,15 @@ public class Tile extends UnMovable {
 		}
 		setX(x);
 		setY(y);
-		// setHeight(Height);
-		// setWidth(Width);
 	}
 
 	@Override
 	public void drawObj(Graphics g) {
-		// TODO Auto-generated method stub
-		// g.drawImage(img, getX(), getY(), Width, Height, null);
-		g.drawRect((int)x, (int)y, (int)getWidth(), (int)getHeight());
+		 g.drawImage(img, (int)x, (int)y, (int)getWidth(), (int)getHeight(), null);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }

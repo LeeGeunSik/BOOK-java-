@@ -45,7 +45,7 @@ public class Map extends Rectangle{
 	}
 
 	public void drawObj(Graphics g) {
-		g.drawRect(x, y, width, height);
+//		g.drawRect(x, y, width, height);
 	}
 	@Override
 	public boolean equals(Object obj) {

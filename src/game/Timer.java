@@ -1,7 +1,11 @@
 package game;
 
+import java.awt.Dialog;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 public class Timer implements Runnable {// 움직이는 객체를 받아서 시간에 따라 움직이게 하는 클래스
 
@@ -22,11 +26,11 @@ public class Timer implements Runnable {// 움직이는 객체를 받아서 시간에 따라 움
 		while (true) {
 			for (Movable mobj : m) {
 				mobj.moveX();// 객체의 move메소드를 호출하여 움직임.
-				check();
-				mobj.moveX();
+				check();//객체들이 충돌하는지 검사
+				mobj.backX();//충돌하면 다시 전위치로 이동
 				mobj.moveY();
 				check();
-				mobj.moveY();
+				mobj.backY();
 			}
 			panel.repaint();
 			try {
@@ -45,12 +49,12 @@ public class Timer implements Runnable {// 움직이는 객체를 받아서 시간에 따라 움
 			for (int j = i + 1; j < obj.size(); j++) {// 모든 객체를 비교해 본다.
 				a = obj.get(i);
 				b = obj.get(j);
-				a.checked = true;
 				if (a.equals(b)) {
 					switch (a.toString()) {
 					case "player":// 플레이어가
 						if (b.toString() == "wolf")// 늑대와 만났을때
-							System.out.println("you die.");
+//							new JOptionPane().showMessageDialog(null, "게임오버");
+							System.out.println("늑대와 만남.");
 						else if (b.toString() == "wall") {
 							Player p;
 							p = (Player) a;
@@ -58,8 +62,9 @@ public class Timer implements Runnable {// 움직이는 객체를 받아서 시간에 따라 움
 						}
 						break;
 					case "wolf":
-						if (b.toString() == "turningPt")
-
+						if (b.toString() == "wall"){
+							a.bumped = true;
+						}
 							break;
 
 					default:

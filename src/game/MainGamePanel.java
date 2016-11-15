@@ -44,14 +44,14 @@ public class MainGamePanel extends JPanel implements KeyListener {
 		player = new Player();
 		gameObj.add(player);// 플레이어 추가
 		movingObj.add(player);
-		for(int i=0;i<wallPos.length;i++)
-			gameObj.add(new Wall(wallPos[i][1]*Map.offset, wallPos[i][0]*Map.offset));
 		addKeyListener(this);		
-		w= new Wolf(50, 50);
+		w= new Wolf(500, 400);
 		gameObj.add(w);
 		movingObj.add(w);
+		for(int i=0;i<wallPos.length;i++)
+			gameObj.add(new Wall(wallPos[i][1]*Map.offset, wallPos[i][0]*Map.offset));
 		new Thread(new Timer(movingObj, gameObj,this)).start();// 시간을 가게 하는 쓰레드 생성 및 시작
-//		new Thread(new Checker(gameObj)).start();;
+		setDoubleBuffered(true);
 
 	}
 
