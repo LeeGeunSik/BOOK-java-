@@ -32,7 +32,7 @@ public class Timer implements Runnable {// 움직이는 객체를 받아서 시간에 따라 움
 				check();
 				mobj.backY();
 			}
-			panel.repaint();
+			panel.repaint();//패널에 현재 객체들의 위치 업데이트
 			try {
 				Thread.sleep(10);// 0.01초 일시정지
 			} catch (InterruptedException e) {
