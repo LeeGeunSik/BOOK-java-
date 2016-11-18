@@ -14,7 +14,7 @@ public class Tile extends UnMovable {
 
 	public Tile(int x, int y) {
 		try {
-			img = ImageIO.read(new File("brick.png"));
+			img = ImageIO.read(new File("Grass.jpg"));
 		} catch (IOException e) {
 			System.out.println("벽돌타일그림 불러오기 실패");
 		}

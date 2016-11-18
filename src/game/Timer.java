@@ -32,7 +32,8 @@ public class Timer implements Runnable {// 움직이는 객체를 받아서 시간에 따라 움
 				check();
 				mobj.backY();
 			}
-			panel.repaint();//패널에 현재 객체들의 위치 업데이트
+			panel.repaint();
+			panel.requestFocus();
 			try {
 				Thread.sleep(10);// 0.01초 일시정지
 			} catch (InterruptedException e) {
@@ -52,9 +53,16 @@ public class Timer implements Runnable {// 움직이는 객체를 받아서 시간에 따라 움
 				if (a.equals(b)) {
 					switch (a.toString()) {
 					case "player":// 플레이어가
-						if (b.toString() == "wolf")// 늑대와 만났을때
-//							new JOptionPane().showMessageDialog(null, "게임오버");
-							System.out.println("늑대와 만남.");
+						if (b.toString() == "wolf"){// 늑대와 만났을때
+							new JOptionPane().showMessageDialog(null, "게임오버");
+							try {
+								Thread.sleep(10000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+//							System.out.println("늑대와 만남.");
 						else if (b.toString() == "wall") {
 							Player p;
 							p = (Player) a;
