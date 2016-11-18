@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-public class Timer implements Runnable {// 움직이는 객체를 받아서 시간에 따라 움직이게 하는 클래스
+public class Timer extends Thread {// 움직이는 객체를 받아서 시간에 따라 움직이게 하는 클래스
 
 	ArrayList<Movable> m;// 움직이는 객체들의 리스트
 	MainGamePanel panel;// 게임패널. 객체들을 움직인다음 repaint를 호출하기 위함.
@@ -46,7 +46,7 @@ public class Timer implements Runnable {// 움직이는 객체를 받아서 시간에 따라 움
 	public void check() {// 객체들의 충돌여부를 검사하는 메소드
 
 		Map a, b;
-		for (int i = 0; i < obj.size(); i++)
+		for (int i = 0; i < m.size(); i++)
 			for (int j = i + 1; j < obj.size(); j++) {// 모든 객체를 비교해 본다.
 				a = obj.get(i);
 				b = obj.get(j);
@@ -55,12 +55,8 @@ public class Timer implements Runnable {// 움직이는 객체를 받아서 시간에 따라 움
 					case "player":// 플레이어가
 						if (b.toString() == "wolf"){// 늑대와 만났을때
 							new JOptionPane().showMessageDialog(null, "게임오버");
-							try {
-								Thread.sleep(10000);
-							} catch (InterruptedException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
+							panel.timeStop();//스레드를 죽인다.
+							
 						}
 //							System.out.println("늑대와 만남.");
 						else if (b.toString() == "wall") {

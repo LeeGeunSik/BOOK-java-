@@ -17,8 +17,8 @@ public class Wolf extends Movable {
 		// TODO Auto-generated constructor stub
 		setX(x);
 		setY(y);
-		setHeight(45);
-		setWidth(45);
+		setHeight(50);
+		setWidth(50);
 		r = new Random();//¹æÇâÀ» ·£´ıÀ¸·Î ¹Ù²ãÁÖ±â À§ÇÑ ·£´ı°´Ã¼
 		try {
 			wolf = ImageIO.read(new File("wolf.png"));
