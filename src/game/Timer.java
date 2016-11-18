@@ -55,10 +55,9 @@ public class Timer extends Thread {// 움직이는 객체를 받아서 시간에 따라 움직이�
 					case "player":// 플레이어가
 						if (b.toString() == "wolf"){// 늑대와 만났을때
 							new JOptionPane().showMessageDialog(null, "게임오버");
-							panel.timeStop();//스레드를 죽인다.
+							panel.gameStop();//스레드를 죽인다.
 							
 						}
-//							System.out.println("늑대와 만남.");
 						else if (b.toString() == "wall") {
 							Player p;
 							p = (Player) a;

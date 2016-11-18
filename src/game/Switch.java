@@ -14,12 +14,13 @@ public class Switch extends UnMovable{
 		try {
 			img = ImageIO.read(new File("brick.png"));
 		} catch (IOException e) {
-			System.out.println("벽돌타일그림 불러오기 실패");
+			System.out.println("스위치그림 불러오기 실패");
 		}
 	}
 
 	@Override
 	public void drawObj(Graphics g) {
 		// TODO Auto-generated method stub
+		g.drawImage(img, (int)getX(), (int)getY(), (int)getWidth(), (int)getHeight(), null);
 	}
 }

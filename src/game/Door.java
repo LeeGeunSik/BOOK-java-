@@ -30,7 +30,6 @@ public class Door extends UnMovable {
 	@Override
 	public void drawObj(Graphics g) {
 		// TODO Auto-generated method stub
-		super.drawObj(g);
 		g.drawImage(img, (int)getX(), (int)getY(), (int)getWidth(), (int)getHeight(), null);
 	}
 }
