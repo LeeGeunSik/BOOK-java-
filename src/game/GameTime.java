@@ -4,16 +4,17 @@ import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.TimerTask;
 
 import javax.swing.JOptionPane;
 
-public class Timer extends Thread {// 움직이는 객체를 받아서 시간에 따라 움직이게 하는 클래스
+public class GameTime extends Thread {// 움직이는 객체를 받아서 시간에 따라 움직이게 하는 클래스
 
-	ArrayList<Movable> m;// 움직이는 객체들의 리스트
-	MainGamePanel panel;// 게임패널. 객체들을 움직인다음 repaint를 호출하기 위함.
-	ArrayList<Map> obj;// 모든 객체 리스트
+	private ArrayList<Movable> m;// 움직이는 객체들의 리스트
+	private MainGamePanel panel;// 게임패널. 객체들을 움직인다음 repaint를 호출하기 위함.
+	private ArrayList<Map> obj;// 모든 객체 리스트
 
-	public Timer(ArrayList<Movable> p, ArrayList<Map> all, MainGamePanel panel) {
+	public GameTime(ArrayList<Movable> p, ArrayList<Map> all, MainGamePanel panel) {
 		// TODO 움직이는 객체들의 리스트를 받고 게임패널의 레퍼런스를 받는다.
 		this.m = p;
 		this.panel = panel;
@@ -33,7 +34,8 @@ public class Timer extends Thread {// 움직이는 객체를 받아서 시간에 따라 움직이�
 				mobj.backY();
 			}
 			panel.repaint();
-			panel.requestFocus();
+			if(!panel.isFocusOwner())
+				panel.requestFocus();
 			try {
 				Thread.sleep(10);// 0.01초 일시정지
 			} catch (InterruptedException e) {

@@ -1,17 +1,21 @@
 package game;
 
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Date;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 
 public class MainGamePanel extends JPanel implements KeyListener {
-	CreateObj gameWorld;
-	Thread gameTime;
+	private CreateObj gameWorld;
+	private GameTime gameTime;
 	private boolean gameStarted;
 	private boolean gamePaused;
+	JProgressBar timeBar;
+	JLabel timeLabel;
 
 	public boolean isGameStarted() {
 		return gameStarted;
@@ -25,6 +29,8 @@ public class MainGamePanel extends JPanel implements KeyListener {
 		// TODO Auto-generated constructor stub
 		addKeyListener(this);
 		setDoubleBuffered(true);
+		this.timeLabel = timeLabel;
+		this.timeBar = timeBar;
 
 	}
 
@@ -33,13 +39,7 @@ public class MainGamePanel extends JPanel implements KeyListener {
 			gameWorld = new CreateObj();
 		} else {
 			gameWorld = new CreateObj();// 게임 월드 생성
-			gameTime = new Thread(new Timer(gameWorld.getMovingObjects(), gameWorld.getAllObjects(), this));// 시간을
-																											// 가게
-																											// 하는
-																											// 쓰레드
-																											// 생성
-																											// 및
-																											// 시작
+			gameTime = new GameTime(gameWorld.getMovingObjects(), gameWorld.getAllObjects(), this);
 			gameTime.start();
 			gameStarted = true;
 			gamePaused = false;
@@ -56,7 +56,8 @@ public class MainGamePanel extends JPanel implements KeyListener {
 		gameTime.suspend();
 		gamePaused = true;
 	}
-	public void gameResume(){
+
+	public void gameResume() {
 		gameTime.resume();
 		gamePaused = false;
 	}
@@ -78,7 +79,7 @@ public class MainGamePanel extends JPanel implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		if (gameStarted&&!gamePaused)
+		if (gameStarted && !gamePaused)
 			switch (e.getKeyCode()) {
 			case KeyEvent.VK_UP:
 				gameWorld.playerUp();
@@ -92,11 +93,6 @@ public class MainGamePanel extends JPanel implements KeyListener {
 			case KeyEvent.VK_RIGHT:
 				gameWorld.playerRight();
 				break;
-			case KeyEvent.VK_SPACE:
-				gameTime.suspend();
-				break;
-			case KeyEvent.VK_CONTROL:
-				gameTime.resume();
 
 			default:
 				break;
@@ -107,7 +103,7 @@ public class MainGamePanel extends JPanel implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		if (gameStarted&&!gamePaused)
+		if (gameStarted && !gamePaused)
 			switch (e.getKeyCode()) {
 			case KeyEvent.VK_UP:
 				gameWorld.playerUpStop();
