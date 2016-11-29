@@ -5,6 +5,8 @@ import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -12,6 +14,7 @@ import java.util.TimerTask;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
@@ -30,26 +33,18 @@ public class MainFrame extends JFrame {
 		this.setTitle("BOOC");
 		this.setLayout(null);
 		this.setSize(1500, 1030);
-		Gpanel = new MainGamePanel();
+		Gpanel = new MainGamePanel(this);
 		Gpanel.setBounds(0, 0, 50 * 25, 50 * 19);
 		add(Gpanel);
 		pause = new JButton("게임시작");
 		pause.setBounds(1260, 700, 100, 50);
 		pause.addActionListener(e -> {
 			if (!Gpanel.isGameStarted()) {//게임이 아직 시작되지 않았을때
-				gameTimer  = new Timer();
-				task = new TimeChecker(timeBar, timeLabel);
-				gameTimer.schedule(task, 1000, 1000);
-				Gpanel.gameStart();
-				pause.setText("일시정지");
+				gameStart();
 			} else if (!Gpanel.isGamePaused()) {//게임이 시작되고 일시정지중이 아닐때
-				Gpanel.gamePause();
-				task.gamePause = true;
-				pause.setText("게임재개");
+				gamePause();
 			} else {//게임이 시작되고 일시정지중일때
-				Gpanel.gameResume();
-				task.gamePause = false;
-				pause.setText("일시정지");
+				gameResume();
 			}
 		});
 		add(pause);
@@ -57,12 +52,7 @@ public class MainFrame extends JFrame {
 		reset.setBounds(1370, 700, 100, 50);
 		reset.addActionListener(e -> {//다시시작하기 버튼
 			if (Gpanel.isGameStarted()) {//게임이 시작되었을때만 작동
-				gameTimer.cancel();
-				gameTimer = new Timer();
-				task = new TimeChecker(timeBar, timeLabel);
-				gameTimer.schedule(task, 1000, 1000);
-				Gpanel.gameStop();
-				Gpanel.gameStart();
+				gameRestart();
 			}
 		});
 		add(reset);
@@ -73,11 +63,39 @@ public class MainFrame extends JFrame {
 		timeLabel.setBounds(50*26, 50*19+15, 200, 30);
 		timeLabel.setText("게임을 시작해주세요.");
 		add(timeLabel);
-		add(timeBar);
-		
-		setResizable(false);
+		add(timeBar);		setResizable(false);
 		setVisible(true);
 		Gpanel.requestFocus();
+	}
+	public void gameStart(){
+		gameTimer  = new Timer();
+		task = new TimeChecker(this);
+		gameTimer.schedule(task, 1000, 1000);
+		Gpanel.gameStart();
+		pause.setText("일시정지");
+	}
+	public void gameStop(){
+		gameTimer.cancel();
+		Gpanel.gameStop();
+		pause.setText("게임시작");
+	}
+	public void gameRestart(){
+		gameTimer.cancel();
+		gameTimer = new Timer();
+		task = new TimeChecker(this);
+		gameTimer.schedule(task, 1000, 1000);
+		Gpanel.gameStop();
+		Gpanel.gameStart();
+	}
+	public void gamePause(){
+		Gpanel.gamePause();
+		task.gamePause = true;
+		pause.setText("게임재개");
+	}
+	public void gameResume(){
+		Gpanel.gameResume();
+		task.gamePause = false;
+		pause.setText("일시정지");
 	}
 
 	public static void main(String[] args) {

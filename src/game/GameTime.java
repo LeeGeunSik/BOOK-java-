@@ -27,14 +27,14 @@ public class GameTime extends Thread {// 움직이는 객체를 받아서 시간에 따라 움직
 		while (true) {
 			for (Movable mobj : m) {
 				mobj.moveX();// 객체의 move메소드를 호출하여 움직임.
-				check();//객체들이 충돌하는지 검사
-				mobj.backX();//충돌하면 다시 전위치로 이동
+				check();// 객체들이 충돌하는지 검사
+				mobj.backX();// 충돌하면 다시 전위치로 이동
 				mobj.moveY();
 				check();
 				mobj.backY();
 			}
 			panel.repaint();
-			if(!panel.isFocusOwner())
+			if (!panel.isFocusOwner())
 				panel.requestFocus();
 			try {
 				Thread.sleep(10);// 0.01초 일시정지
@@ -55,22 +55,19 @@ public class GameTime extends Thread {// 움직이는 객체를 받아서 시간에 따라 움직
 				if (a.equals(b)) {
 					switch (a.toString()) {
 					case "player":// 플레이어가
-						if (b.toString() == "wolf"){// 늑대와 만났을때
-							new JOptionPane().showMessageDialog(null, "게임오버");
-							panel.gameStop();//스레드를 죽인다.
-							
-						}
-						else if (b.toString() == "wall") {
+						if (b.toString() == "wolf") {// 늑대와 만났을때
+							panel.gameStop();
+						} else if (b.toString() == "wall") {
 							Player p;
 							p = (Player) a;
 							p.bumped = true;
 						}
 						break;
 					case "wolf":
-						if (b.toString() == "wall"){
+						if (b.toString() == "wall") {
 							a.bumped = true;
 						}
-							break;
+						break;
 
 					default:
 						break;

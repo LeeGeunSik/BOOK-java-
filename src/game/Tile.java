@@ -8,8 +8,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Tile extends UnMovable {
-	public static final int Height = 100;
-	public static final int Width = 100;
 	BufferedImage img;
 
 	public Tile(int x, int y) {
@@ -24,7 +22,8 @@ public class Tile extends UnMovable {
 
 	@Override
 	public void drawObj(Graphics g) {
-		 g.drawImage(img, (int)x, (int)y, (int)getWidth(), (int)getHeight(), null);
+		g.drawImage(img, (int)x, (int)y, (int)getWidth(), (int)getHeight(), null);
+		g.drawString(""+y/50+","+x/50, x+10, y+10);
 	}
 
 	@Override

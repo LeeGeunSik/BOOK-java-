@@ -3,20 +3,19 @@ package game;
 import java.util.TimerTask;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 
 public class TimeChecker extends TimerTask {
 
-	JProgressBar timeBar;
-	JLabel timeLabel;
+	MainFrame m;
 	int time;
 	public boolean gamePause;
 
-	public TimeChecker(JProgressBar timeBar, JLabel time) {
+	public TimeChecker(MainFrame m) {
 		// TODO Auto-generated constructor stub
-		this.timeLabel = time;
-		this.timeBar = timeBar;
-		this.time = 60;
+		this.m = m;
+		this.time = 15;
 	}
 
 	@Override
@@ -24,10 +23,15 @@ public class TimeChecker extends TimerTask {
 		// TODO Auto-generated method stub
 		if (!gamePause) {
 			time--;
-			timeBar.setValue(time);
-			timeLabel.setText("남은 시간 :" + time);
-			timeLabel.repaint();
-
+			m.timeBar.setValue(time);
+			m.timeLabel.setText("남은 시간 :" + time);
+			m.timeLabel.repaint();
+		}
+		if (time <= 0||!m.Gpanel.isGameStarted()) {
+			m.gameStop();
+			m.timeLabel.setText("게임종료");
+			m.Gpanel.repaint();
+			m.timeBar.setValue(0);
 		}
 
 	}
