@@ -61,11 +61,33 @@ public class GameTime extends Thread {// 움직이는 객체를 받아서 시간에 따라 움직
 							Player p;
 							p = (Player) a;
 							p.bumped = true;
+						} else if (b.toString() == "switch") {
+							Switch s;
+							s = (Switch) b;
+							s.onOff = true;
+						} else if (b.toString() == "door") {
+							Door d;
+							d= (Door)b;
+							if(d.open){
+								new JOptionPane().showMessageDialog(null, "게임 승리!!");
+								panel.gameStop();
+							}
+							else{
+								Player p;
+								p = (Player) a;
+								p.bumped = true;
+							}
 						}
 						break;
 					case "wolf":
 						if (b.toString() == "wall") {
 							a.bumped = true;
+						} else if (b.toString() == "TurningPt") {
+							if (a.x == b.x && a.y == b.y) {
+								Wolf w;
+								w = (Wolf) a;
+								w.turn();
+							}
 						}
 						break;
 
@@ -74,9 +96,17 @@ public class GameTime extends Thread {// 움직이는 객체를 받아서 시간에 따라 움직
 
 					}
 				}
-
 			}
-
+		Switch s=null;
+		Door d=null;
+		for (Map map : obj) {
+			if (map.toString() == "switch")
+				s = (Switch) map;
+			if (map.toString() == "door")
+				d = (Door) map;
+		}
+		if (s.onOff)
+			d.open = true;
 	}
-
+	
 }

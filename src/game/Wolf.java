@@ -20,8 +20,8 @@ public class Wolf extends Movable {
       // TODO Auto-generated constructor stub
       setX(x);
       setY(y);
-      setHeight(45);
-      setWidth(45);
+      setHeight(50);
+      setWidth(50);
       r = new Random();//방향을 랜덤으로 바꿔주기 위한 랜덤객체
       try {
          wolf = ImageIO.read(new File("wolffront.png"));
@@ -66,6 +66,9 @@ public class Wolf extends Movable {
          bumped = false;
       }
       
+   }
+   public void turn(){
+	   changeDirection();
    }
    private void changeDirection() {//늑대의 방향을 바꿔주는 메소드
       switch (r.nextInt(4)) {//0~3의 랜덤값을 생성

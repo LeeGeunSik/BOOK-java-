@@ -15,7 +15,7 @@ public class TimeChecker extends TimerTask {
 	public TimeChecker(MainFrame m) {
 		// TODO Auto-generated constructor stub
 		this.m = m;
-		this.time = 15;
+		this.time = 60;
 	}
 
 	@Override

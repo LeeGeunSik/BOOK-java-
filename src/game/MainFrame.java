@@ -70,7 +70,7 @@ public class MainFrame extends JFrame {
 	public void gameStart(){
 		gameTimer  = new Timer();
 		task = new TimeChecker(this);
-		gameTimer.schedule(task, 1000, 1000);
+		gameTimer.schedule(task, 2000, 1000);
 		Gpanel.gameStart();
 		pause.setText("일시정지");
 	}
